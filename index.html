@@ -4,17 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport"
       content="width=device-width,
-               initial-scale=1,
-               maximum-scale=1,
-               viewport-fit=cover">
+      initial-scale=1,
+      maximum-scale=1,
+      viewport-fit=cover">
 
 <title>Vidéo → MP3</title>
 
-<!-- FFmpeg.wasm -->
-<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"></script>
-<script src="https://unpkg.com/@ffmpeg/util@0.12.1/dist/umd/index.js"></script>
-
-<!-- JSZip -->
+<!-- ZIP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 <style>
@@ -23,16 +19,17 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    min-height: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-                 "SF Pro Text", Arial, sans-serif;
     background: #f5f5f7;
     color: #111;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        Arial,
+        sans-serif;
 }
 
 body {
@@ -44,7 +41,6 @@ body {
 }
 
 .app {
-    width: 100%;
     max-width: 650px;
     margin: auto;
 }
@@ -55,93 +51,51 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .title {
     margin: 0;
-    font-size: 30px;
+    font-size: 29px;
     font-weight: 750;
-    letter-spacing: -0.8px;
+    letter-spacing: -0.7px;
 }
 
 .subtitle {
-    margin-top: 4px;
     color: #777;
     font-size: 14px;
-}
-
-/* BUTTONS */
-
-button {
-    border: 0;
-    font-family: inherit;
-    cursor: pointer;
-    touch-action: manipulation;
+    margin-top: 4px;
 }
 
 .add-button {
     width: 52px;
     height: 52px;
+    border: none;
     border-radius: 17px;
     background: #111;
     color: white;
-    font-size: 27px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 28px;
 }
 
-.main-button {
-    width: 100%;
-    min-height: 56px;
-    border-radius: 18px;
-    background: #111;
-    color: white;
-    font-size: 17px;
-    font-weight: 650;
-    margin-top: 16px;
-}
-
-.main-button:disabled {
-    opacity: .35;
-}
-
-.secondary-button {
-    width: 100%;
-    min-height: 52px;
-    border-radius: 17px;
-    background: white;
-    color: #111;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* DROP / ADD AREA */
+/* ADD AREA */
 
 .add-area {
     background: white;
+    border: 2px dashed #d5d5d8;
     border-radius: 22px;
-    padding: 22px;
+    padding: 23px;
     text-align: center;
-    border: 2px dashed #d8d8dc;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .add-icon {
     font-size: 38px;
-    margin-bottom: 6px;
 }
 
 .add-title {
     font-size: 18px;
     font-weight: 700;
+    margin-top: 5px;
 }
 
 .add-text {
@@ -150,13 +104,13 @@ button {
     margin-top: 5px;
 }
 
-/* FILE LIST */
+/* LIST */
 
 .list-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin: 20px 2px 10px;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .list-title {
@@ -165,9 +119,9 @@ button {
 }
 
 .counter {
-    background: #e6e6e9;
+    background: #e5e5e8;
+    padding: 5px 11px;
     border-radius: 20px;
-    padding: 5px 10px;
     font-size: 13px;
     font-weight: 650;
 }
@@ -178,14 +132,12 @@ button {
     gap: 10px;
 }
 
-/* VIDEO CARD */
+/* CARD */
 
 .video-card {
     background: white;
     border-radius: 20px;
     padding: 15px;
-    position: relative;
-    overflow: hidden;
 }
 
 .video-top {
@@ -197,43 +149,43 @@ button {
 .video-icon {
     width: 46px;
     height: 46px;
-    flex-shrink: 0;
     border-radius: 14px;
     background: #f0f0f2;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 22px;
+    flex-shrink: 0;
 }
 
 .video-info {
-    min-width: 0;
     flex: 1;
-    padding-right: 38px;
+    min-width: 0;
+    padding-right: 35px;
 }
 
 .video-name {
     font-size: 15px;
     font-weight: 650;
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .video-size {
-    font-size: 13px;
     color: #888;
+    font-size: 13px;
     margin-top: 3px;
 }
 
 .remove-button {
-    position: absolute;
-    right: 13px;
-    top: 13px;
+    float: right;
+    margin-top: -39px;
     width: 35px;
     height: 35px;
+    border: none;
     border-radius: 12px;
-    background: #f1f1f3;
+    background: #f0f0f2;
     font-size: 17px;
 }
 
@@ -241,12 +193,31 @@ button {
     opacity: .3;
 }
 
-/* STATUS */
+/* PROGRESS */
+
+.progress-container {
+    height: 7px;
+    background: #e8e8ea;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 13px;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: #111;
+    transition: width .15s linear;
+}
 
 .status {
+    margin-top: 9px;
     font-size: 13px;
-    margin-top: 13px;
     color: #777;
+}
+
+.status.processing {
+    color: #111;
 }
 
 .status.success {
@@ -257,33 +228,42 @@ button {
     color: #c62828;
 }
 
-.status.processing {
-    color: #111;
+/* BUTTONS */
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
-/* PROGRESS */
-
-.progress-container {
+.main-button,
+.secondary-button {
     width: 100%;
-    height: 7px;
-    background: #e9e9eb;
-    border-radius: 10px;
-    overflow: hidden;
+    min-height: 55px;
+    border-radius: 18px;
+    font-size: 16px;
+    font-weight: 650;
     margin-top: 11px;
 }
 
-.progress {
-    width: 0%;
-    height: 100%;
+.main-button {
     background: #111;
-    border-radius: 10px;
-    transition: width .15s linear;
+    color: white;
+    border: none;
 }
 
-/* BOTTOM */
+.secondary-button {
+    background: white;
+    color: #111;
+    border: 1px solid #ddd;
+}
 
-.bottom {
-    margin-top: 20px;
+button:disabled {
+    opacity: .35;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .zip-status {
@@ -293,41 +273,41 @@ button {
     margin-top: 12px;
 }
 
-/* FFmpeg LOADING */
+/* LOADING */
 
-.loading-box {
+.loading {
     position: fixed;
     inset: 0;
-    background: rgba(245,245,247,.92);
+    z-index: 9999;
+    background: rgba(245,245,247,.94);
     backdrop-filter: blur(12px);
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
     padding: 25px;
 }
 
-.loading-box.visible {
+.loading.show {
     display: flex;
 }
 
 .loading-card {
-    background: white;
     width: 100%;
     max-width: 400px;
+    background: white;
     border-radius: 25px;
     padding: 28px;
     text-align: center;
 }
 
 .spinner {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border: 4px solid #ddd;
     border-top-color: #111;
     border-radius: 50%;
     animation: spin .8s linear infinite;
-    margin: 0 auto 18px;
+    margin: auto auto 18px;
 }
 
 @keyframes spin {
@@ -344,19 +324,26 @@ button {
 .loading-text {
     color: #777;
     font-size: 14px;
-    margin-top: 7px;
+    line-height: 1.45;
+    margin-top: 8px;
 }
 
-/* MOBILE */
+.loading-error {
+    color: #c62828;
+    margin-top: 15px;
+    font-size: 14px;
+}
 
-@media (max-width: 450px) {
-    .title {
-        font-size: 27px;
-    }
-
-    .video-card {
-        padding: 13px;
-    }
+.loading-close {
+    display: none;
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 15px;
+    background: #111;
+    color: white;
+    margin-top: 18px;
+    font-weight: 650;
 }
 </style>
 </head>
@@ -365,33 +352,36 @@ button {
 
 <div class="app">
 
-    <!-- HEADER -->
     <div class="header">
+
         <div>
             <h1 class="title">🎵 Vidéo → MP3</h1>
+
             <div class="subtitle">
-                Convertis tes vidéos en musique
+                Convertis tes vidéos en MP3
             </div>
         </div>
 
         <button
             class="add-button"
-            id="headerAddButton"
-            aria-label="Ajouter des vidéos">
+            id="addButton">
             +
         </button>
+
     </div>
 
-    <!-- FILE INPUT -->
+
     <input
-        type="file"
         id="fileInput"
         class="hidden"
+        type="file"
         accept="video/*,.mp4,.mov,.m4v,.webm,.avi,.mkv"
         multiple>
 
-    <!-- ADD AREA -->
-    <div class="add-area" id="addArea">
+
+    <div
+        class="add-area"
+        id="addArea">
 
         <div class="add-icon">📁</div>
 
@@ -400,84 +390,100 @@ button {
         </div>
 
         <div class="add-text">
-            Sélectionne une ou plusieurs vidéos
+            Choisis une ou plusieurs vidéos
         </div>
 
     </div>
 
-    <!-- LIST HEADER -->
+
     <div class="list-header">
 
         <div class="list-title">
-            Vidéos
+            Vidéos sélectionnées
         </div>
 
-        <div class="counter" id="counter">
+        <div
+            class="counter"
+            id="counter">
             0
         </div>
 
     </div>
 
-    <!-- LIST -->
+
     <div
         class="video-list"
         id="videoList">
     </div>
 
-    <!-- ACTIONS -->
-    <div class="bottom">
 
-        <button
-            class="main-button"
-            id="convertButton"
-            disabled>
-            🎵 Convertir en MP3
-        </button>
+    <button
+        class="main-button"
+        id="convertButton"
+        disabled>
+        🎵 Convertir en MP3
+    </button>
 
-        <button
-            class="secondary-button"
-            id="zipButton"
-            disabled>
-            📦 Créer le ZIP
-        </button>
 
-        <button
-            class="secondary-button"
-            id="saveButton"
-            disabled>
-            💾 Enregistrer dans Fichiers
-        </button>
+    <button
+        class="secondary-button"
+        id="zipButton"
+        disabled>
+        📦 Créer le ZIP
+    </button>
 
-        <div
-            class="zip-status"
-            id="zipStatus">
-        </div>
 
+    <button
+        class="secondary-button"
+        id="saveButton"
+        disabled>
+        💾 Enregistrer dans Fichiers
+    </button>
+
+
+    <div
+        class="zip-status"
+        id="zipStatus">
     </div>
 
 </div>
 
-<!-- LOADING FFmpeg -->
+
+<!-- CHARGEMENT -->
 
 <div
-    class="loading-box"
-    id="loadingBox">
+    class="loading"
+    id="loading">
 
     <div class="loading-card">
 
-        <div class="spinner"></div>
+        <div
+            class="spinner"
+            id="spinner">
+        </div>
 
         <div
             class="loading-title"
             id="loadingTitle">
-            Préparation...
+            Chargement du moteur
         </div>
 
         <div
             class="loading-text"
             id="loadingText">
-            Chargement du moteur de conversion
+            Préparation du convertisseur MP3...
         </div>
+
+        <div
+            class="loading-error"
+            id="loadingError">
+        </div>
+
+        <button
+            class="loading-close"
+            id="loadingClose">
+            Fermer
+        </button>
 
     </div>
 
@@ -485,182 +491,180 @@ button {
 
 
 <script>
+
 /* =========================================================
    VARIABLES
 ========================================================= */
 
-const fileInput = document.getElementById("fileInput");
-const headerAddButton = document.getElementById("headerAddButton");
-const addArea = document.getElementById("addArea");
+const fileInput =
+    document.getElementById("fileInput");
 
-const videoList = document.getElementById("videoList");
-const counter = document.getElementById("counter");
+const addButton =
+    document.getElementById("addButton");
 
-const convertButton = document.getElementById("convertButton");
-const zipButton = document.getElementById("zipButton");
-const saveButton = document.getElementById("saveButton");
+const addArea =
+    document.getElementById("addArea");
 
-const zipStatus = document.getElementById("zipStatus");
+const videoList =
+    document.getElementById("videoList");
 
-const loadingBox = document.getElementById("loadingBox");
-const loadingTitle = document.getElementById("loadingTitle");
-const loadingText = document.getElementById("loadingText");
+const counter =
+    document.getElementById("counter");
 
+const convertButton =
+    document.getElementById("convertButton");
 
-/*
-   Chaque vidéo est stockée sous cette forme :
+const zipButton =
+    document.getElementById("zipButton");
 
-   {
-       id,
-       file,
-       status,
-       progress,
-       mp3,
-       outputName
-   }
-*/
+const saveButton =
+    document.getElementById("saveButton");
+
+const zipStatus =
+    document.getElementById("zipStatus");
+
+const loading =
+    document.getElementById("loading");
+
+const loadingTitle =
+    document.getElementById("loadingTitle");
+
+const loadingText =
+    document.getElementById("loadingText");
+
+const loadingError =
+    document.getElementById("loadingError");
+
+const loadingClose =
+    document.getElementById("loadingClose");
+
+const spinner =
+    document.getElementById("spinner");
+
 
 let videos = [];
 
 let ffmpeg = null;
+
 let ffmpegLoaded = false;
+
+let currentVideo = null;
 
 let zipBlob = null;
 
 
 /* =========================================================
-   OUVRIR LE SÉLECTEUR DE FICHIERS
+   OUVRIR FICHIERS
 ========================================================= */
 
-function openFilePicker() {
+function openFiles() {
     fileInput.click();
 }
 
-headerAddButton.addEventListener("click", openFilePicker);
-addArea.addEventListener("click", openFilePicker);
+addButton.addEventListener(
+    "click",
+    openFiles
+);
+
+addArea.addEventListener(
+    "click",
+    openFiles
+);
 
 
 /* =========================================================
-   SÉLECTION DES VIDÉOS
+   AJOUT
 ========================================================= */
 
-fileInput.addEventListener("change", function () {
+fileInput.addEventListener(
+    "change",
+    function () {
 
-    const selectedFiles = Array.from(fileInput.files);
+        const files =
+            Array.from(fileInput.files);
 
-    addVideos(selectedFiles);
+        for (const file of files) {
 
-    /*
-       Permet de sélectionner à nouveau les mêmes fichiers
-       plus tard.
-    */
+            const isVideo =
+                file.type.startsWith("video/") ||
+                /\.(mp4|mov|m4v|webm|avi|mkv)$/i
+                    .test(file.name);
 
-    fileInput.value = "";
+            if (!isVideo) {
+                continue;
+            }
 
-});
+            const duplicate =
+                videos.some(v =>
+                    v.file.name === file.name &&
+                    v.file.size === file.size &&
+                    v.file.lastModified ===
+                        file.lastModified
+                );
 
+            if (duplicate) {
+                continue;
+            }
 
-/* =========================================================
-   AJOUT DE VIDÉOS
-========================================================= */
+            videos.push({
 
-function addVideos(files) {
+                id:
+                    Date.now() +
+                    "_" +
+                    Math.random()
+                        .toString(36)
+                        .substring(2),
 
-    for (const file of files) {
+                file,
 
-        /*
-           Vérification simple du type.
-        */
+                progress: 0,
 
-        const isVideo =
-            file.type.startsWith("video/") ||
-            /\.(mp4|mov|m4v|webm|avi|mkv)$/i.test(file.name);
+                status: "waiting",
 
-        if (!isVideo) {
-            continue;
+                mp3: null,
+
+                outputName:
+                    getMP3Name(file.name)
+
+            });
+
         }
 
-        /*
-           Évite d'ajouter deux fois exactement le même
-           fichier dans la liste.
-        */
+        fileInput.value = "";
 
-        const alreadyExists = videos.some(v =>
-            v.file.name === file.name &&
-            v.file.size === file.size &&
-            v.file.lastModified === file.lastModified
-        );
+        zipBlob = null;
 
-        if (alreadyExists) {
-            continue;
-        }
+        zipStatus.textContent = "";
 
-        videos.push({
+        render();
 
-            id:
-                Date.now().toString() +
-                Math.random().toString(36).slice(2),
-
-            file: file,
-
-            status: "waiting",
-
-            progress: 0,
-
-            mp3: null,
-
-            outputName:
-                getMP3Name(file.name)
-
-        });
+        updateButtons();
 
     }
-
-    renderList();
-
-    updateButtons();
-
-}
+);
 
 
 /* =========================================================
-   NOM DU MP3
+   RENDU
 ========================================================= */
 
-function getMP3Name(filename) {
-
-    /*
-       Retire l'extension de la vidéo.
-    */
-
-    const lastDot = filename.lastIndexOf(".");
-
-    if (lastDot === -1) {
-        return filename + ".mp3";
-    }
-
-    return filename.substring(0, lastDot) + ".mp3";
-
-}
-
-
-/* =========================================================
-   AFFICHAGE DE LA LISTE
-========================================================= */
-
-function renderList() {
+function render() {
 
     videoList.innerHTML = "";
 
-    counter.textContent = videos.length;
+    counter.textContent =
+        videos.length;
 
-    videos.forEach(video => {
+    for (const video of videos) {
 
-        const card = document.createElement("div");
+        const card =
+            document.createElement("div");
 
-        card.className = "video-card";
+        card.className =
+            "video-card";
 
-        card.dataset.id = video.id;
+        card.dataset.id =
+            video.id;
 
         card.innerHTML = `
 
@@ -672,17 +676,12 @@ function renderList() {
 
                 <div class="video-info">
 
-                    <div class="video-name"
-                         title="${escapeHTML(video.file.name)}">
-
+                    <div class="video-name">
                         ${escapeHTML(video.file.name)}
-
                     </div>
 
                     <div class="video-size">
-
                         ${formatBytes(video.file.size)}
-
                     </div>
 
                 </div>
@@ -690,11 +689,8 @@ function renderList() {
             </div>
 
             <button
-                class="remove-button"
-                aria-label="Retirer cette vidéo">
-
+                class="remove-button">
                 🗑️
-
             </button>
 
             <div class="progress-container">
@@ -702,90 +698,116 @@ function renderList() {
                 <div
                     class="progress"
                     style="width:${video.progress}%">
-
                 </div>
 
             </div>
 
-            <div class="status ${getStatusClass(video.status)}">
+            <div
+                class="status ${statusClass(video.status)}">
 
-                ${getStatusText(video)}
+                ${statusText(video)}
 
             </div>
         `;
 
 
-        /*
-           Bouton supprimer
-        */
-
-        const removeButton =
-            card.querySelector(".remove-button");
-
-        removeButton.addEventListener("click", function () {
-
-            /*
-               On ne permet pas de supprimer la vidéo
-               actuellement en conversion.
-            */
-
-            if (video.status === "processing") {
-                return;
-            }
-
-            videos = videos.filter(
-                v => v.id !== video.id
+        const remove =
+            card.querySelector(
+                ".remove-button"
             );
 
-            zipBlob = null;
+        if (video.status === "processing") {
+            remove.disabled = true;
+        }
 
-            zipStatus.textContent = "";
+        remove.addEventListener(
+            "click",
+            function () {
 
-            renderList();
+                if (
+                    video.status ===
+                    "processing"
+                ) {
+                    return;
+                }
 
-            updateButtons();
+                videos =
+                    videos.filter(
+                        v =>
+                            v.id !==
+                            video.id
+                    );
 
-        });
+                zipBlob = null;
+
+                zipStatus.textContent =
+                    "";
+
+                render();
+
+                updateButtons();
+
+            }
+        );
 
 
         videoList.appendChild(card);
-
-    });
-
-}
-
-
-/* =========================================================
-   STATUT
-========================================================= */
-
-function getStatusText(video) {
-
-    switch (video.status) {
-
-        case "waiting":
-            return "En attente";
-
-        case "processing":
-            return "Conversion : " +
-                   Math.round(video.progress) +
-                   " %";
-
-        case "done":
-            return "✓ MP3 terminé";
-
-        case "error":
-            return "⚠️ Erreur pendant la conversion";
-
-        default:
-            return "";
 
     }
 
 }
 
 
-function getStatusClass(status) {
+/* =========================================================
+   STATUS
+========================================================= */
+
+function statusText(video) {
+
+    if (
+        video.status ===
+        "waiting"
+    ) {
+        return "En attente";
+    }
+
+    if (
+        video.status ===
+        "processing"
+    ) {
+        return (
+            "Conversion : " +
+            Math.round(
+                video.progress
+            ) +
+            " %"
+        );
+    }
+
+    if (
+        video.status ===
+        "done"
+    ) {
+        return "✓ MP3 terminé";
+    }
+
+    if (
+        video.status ===
+        "error"
+    ) {
+        return "⚠️ Erreur";
+    }
+
+    return "";
+
+}
+
+
+function statusClass(status) {
+
+    if (status === "processing") {
+        return "processing";
+    }
 
     if (status === "done") {
         return "success";
@@ -795,17 +817,13 @@ function getStatusClass(status) {
         return "error";
     }
 
-    if (status === "processing") {
-        return "processing";
-    }
-
     return "";
 
 }
 
 
 /* =========================================================
-   MISE À JOUR D'UNE CARTE SANS TOUT RECRÉER
+   UPDATE CARD
 ========================================================= */
 
 function updateCard(video) {
@@ -820,20 +838,26 @@ function updateCard(video) {
     }
 
     const progress =
-        card.querySelector(".progress");
+        card.querySelector(
+            ".progress"
+        );
 
     const status =
-        card.querySelector(".status");
+        card.querySelector(
+            ".status"
+        );
 
     progress.style.width =
         video.progress + "%";
 
     status.className =
         "status " +
-        getStatusClass(video.status);
+        statusClass(
+            video.status
+        );
 
     status.textContent =
-        getStatusText(video);
+        statusText(video);
 
 }
 
@@ -847,26 +871,32 @@ function updateButtons() {
     const hasVideos =
         videos.length > 0;
 
+    const waiting =
+        videos.some(
+            v =>
+                v.status ===
+                "waiting"
+        );
+
+    const processing =
+        videos.some(
+            v =>
+                v.status ===
+                "processing"
+        );
+
     const allDone =
         hasVideos &&
         videos.every(
-            video => video.status === "done"
-        );
-
-    const hasProcessing =
-        videos.some(
-            video => video.status === "processing"
-        );
-
-    const hasWaiting =
-        videos.some(
-            video => video.status === "waiting"
+            v =>
+                v.status ===
+                "done"
         );
 
     convertButton.disabled =
         !hasVideos ||
-        hasProcessing ||
-        !hasWaiting;
+        !waiting ||
+        processing;
 
     zipButton.disabled =
         !allDone;
@@ -878,8 +908,44 @@ function updateButtons() {
 
 
 /* =========================================================
-   CHARGER FFMPEG
+   CHARGEMENT DE FFMPEG
 ========================================================= */
+
+function loadScript(url) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+            script.src = url;
+
+            script.async = true;
+
+            script.onload =
+                resolve;
+
+            script.onerror =
+                () =>
+                    reject(
+                        new Error(
+                            "Impossible de charger : " +
+                            url
+                        )
+                    );
+
+            document.head.appendChild(
+                script
+            );
+
+        }
+    );
+
+}
+
 
 async function loadFFmpeg() {
 
@@ -887,40 +953,93 @@ async function loadFFmpeg() {
         return;
     }
 
-    loadingBox.classList.add("visible");
+    loading.classList.add("show");
+
+    loadingError.textContent = "";
+
+    loadingClose.style.display =
+        "none";
+
+    spinner.style.display =
+        "block";
 
     loadingTitle.textContent =
         "Chargement du moteur";
 
     loadingText.textContent =
-        "Première utilisation : cela peut prendre un moment...";
+        "Téléchargement de FFmpeg. " +
+        "Cela peut prendre un peu de temps " +
+        "la première fois.";
 
 
     try {
 
+        /*
+           Charge FFmpeg depuis jsDelivr.
+        */
+
+        if (
+            typeof FFmpeg ===
+            "undefined"
+        ) {
+
+            await loadScript(
+                "https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"
+            );
+
+        }
+
+
+        if (
+            typeof FFmpegUtil ===
+            "undefined"
+        ) {
+
+            await loadScript(
+                "https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/umd/index.js"
+            );
+
+        }
+
+
+        if (
+            typeof FFmpeg ===
+            "undefined"
+        ) {
+            throw new Error(
+                "FFmpeg n'a pas été chargé."
+            );
+        }
+
+
         const {
-            FFmpeg
-        } = FFmpegWASM;
+            FFmpeg: FFmpegClass
+        } = FFmpeg;
 
         const {
             toBlobURL
         } = FFmpegUtil;
 
-        ffmpeg = new FFmpeg();
+
+        ffmpeg =
+            new FFmpegClass();
+
 
         /*
-           Affichage de la progression FFmpeg.
+           Progression FFmpeg.
         */
 
         ffmpeg.on(
             "progress",
             ({ progress }) => {
 
-                if (!currentVideo) {
+                if (
+                    !currentVideo
+                ) {
                     return;
                 }
 
-                const percent =
+                currentVideo.progress =
                     Math.max(
                         0,
                         Math.min(
@@ -929,62 +1048,94 @@ async function loadFFmpeg() {
                         )
                     );
 
-                currentVideo.progress =
-                    percent;
-
-                updateCard(currentVideo);
+                updateCard(
+                    currentVideo
+                );
 
             }
         );
 
 
         /*
-           CDN utilisé pour les fichiers du core.
+           Version SINGLE THREAD.
+
+           Elle est volontairement utilisée
+           pour être plus simple sur iPhone.
         */
 
         const baseURL =
-            "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+            "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd";
 
 
-        await ffmpeg.load({
-
-            coreURL:
-                await toBlobURL(
-                    `${baseURL}/ffmpeg-core.js`,
-                    "text/javascript"
-                ),
-
-            wasmURL:
-                await toBlobURL(
-                    `${baseURL}/ffmpeg-core.wasm`,
-                    "application/wasm"
-                )
-
-        });
+        loadingText.textContent =
+            "Préparation du moteur FFmpeg...";
 
 
-        ffmpegLoaded = true;
+        await Promise.race([
 
-        loadingBox.classList.remove("visible");
+            ffmpeg.load({
+
+                coreURL:
+                    await toBlobURL(
+                        `${baseURL}/ffmpeg-core.js`,
+                        "text/javascript"
+                    ),
+
+                wasmURL:
+                    await toBlobURL(
+                        `${baseURL}/ffmpeg-core.wasm`,
+                        "application/wasm"
+                    )
+
+            }),
+
+            new Promise(
+                (_, reject) =>
+                    setTimeout(
+                        () =>
+                            reject(
+                                new Error(
+                                    "Le chargement de FFmpeg a dépassé 60 secondes."
+                                )
+                            ),
+                        60000
+                    )
+            )
+
+        ]);
+
+
+        ffmpegLoaded =
+            true;
+
+
+        loading.classList.remove(
+            "show"
+        );
 
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "FFmpeg:",
+            error
+        );
+
+        spinner.style.display =
+            "none";
 
         loadingTitle.textContent =
-            "Impossible de charger FFmpeg";
+            "❌ Impossible de charger FFmpeg";
 
         loadingText.textContent =
-            "Vérifie que l'application est ouverte depuis HTTPS.";
+            "Le moteur de conversion n'a pas pu être chargé.";
 
-        setTimeout(() => {
+        loadingError.textContent =
+            "Vérifie que tu ouvres ton application depuis une adresse HTTPS et que ton iPhone est connecté à Internet.";
 
-            loadingBox.classList.remove(
-                "visible"
-            );
+        loadingClose.style.display =
+            "block";
 
-        }, 3000);
 
         throw error;
 
@@ -994,30 +1145,42 @@ async function loadFFmpeg() {
 
 
 /* =========================================================
-   VIDÉO ACTUELLE
+   FERMER ERREUR
 ========================================================= */
 
-let currentVideo = null;
+loadingClose.addEventListener(
+    "click",
+    function () {
+
+        loading.classList.remove(
+            "show"
+        );
+
+    }
+);
 
 
 /* =========================================================
    CONVERTIR UNE VIDÉO
 ========================================================= */
 
-async function convertOneVideo(video) {
+async function convertOne(video) {
 
-    currentVideo = video;
+    currentVideo =
+        video;
 
-    video.status = "processing";
-    video.progress = 0;
+    video.status =
+        "processing";
+
+    video.progress =
+        0;
 
     updateCard(video);
-    updateButtons();
 
 
     const inputName =
-        "input_" + video.id;
-
+        "input_" +
+        video.id;
 
     const outputName =
         "output_" +
@@ -1028,28 +1191,26 @@ async function convertOneVideo(video) {
     try {
 
         /*
-           Met le fichier dans la mémoire virtuelle
-           de FFmpeg.
+           Lit le fichier vidéo.
         */
 
-        const fileData =
-            await fetch(
-                URL.createObjectURL(video.file)
-            ).then(r => r.arrayBuffer());
+        const buffer =
+            await video.file.arrayBuffer();
 
+
+        /*
+           Écrit temporairement la vidéo
+           dans la mémoire de FFmpeg.
+        */
 
         await ffmpeg.writeFile(
             inputName,
-            new Uint8Array(fileData)
+            new Uint8Array(buffer)
         );
 
 
         /*
-           Conversion réelle :
-
-           -vn = pas de vidéo
-           -codec:a libmp3lame = encodeur MP3
-           -q:a 2 = très bonne qualité VBR
+           Conversion réelle VIDEO → MP3.
         */
 
         await ffmpeg.exec([
@@ -1071,7 +1232,7 @@ async function convertOneVideo(video) {
 
 
         /*
-           Récupération du MP3.
+           Récupère le MP3.
         */
 
         const data =
@@ -1084,48 +1245,54 @@ async function convertOneVideo(video) {
             new Blob(
                 [data.buffer],
                 {
-                    type: "audio/mpeg"
+                    type:
+                        "audio/mpeg"
                 }
             );
 
 
-        video.progress = 100;
+        video.progress =
+            100;
 
-        video.status = "done";
+        video.status =
+            "done";
 
 
         /*
-           IMPORTANT :
-
-           On supprime immédiatement les fichiers
-           de FFmpeg pour éviter d'accumuler les gros
-           fichiers en mémoire.
+           Nettoyage immédiat.
         */
 
         try {
-            await ffmpeg.deleteFile(inputName);
-        } catch {}
+            await ffmpeg.deleteFile(
+                inputName
+            );
+        } catch (e) {}
 
         try {
-            await ffmpeg.deleteFile(outputName);
-        } catch {}
+            await ffmpeg.deleteFile(
+                outputName
+            );
+        } catch (e) {}
 
 
     } catch (error) {
 
         console.error(
-            "Erreur conversion :",
+            "Conversion:",
             error
         );
 
-        video.status = "error";
+        video.status =
+            "error";
 
-        video.progress = 0;
+        video.progress =
+            0;
 
     }
 
 
-    currentVideo = null;
+    currentVideo =
+        null;
 
     updateCard(video);
 
@@ -1135,7 +1302,7 @@ async function convertOneVideo(video) {
 
 
 /* =========================================================
-   CONVERSION DE TOUTES LES VIDÉOS
+   CONVERTIR TOUTES LES VIDÉOS
 ========================================================= */
 
 convertButton.addEventListener(
@@ -1147,17 +1314,20 @@ convertButton.addEventListener(
         }
 
 
-        convertButton.disabled = true;
+        convertButton.disabled =
+            true;
 
-        zipBlob = null;
+        zipBlob =
+            null;
 
-        zipStatus.textContent = "";
+        zipStatus.textContent =
+            "";
 
 
         try {
 
             /*
-               Charge FFmpeg une seule fois.
+               FFmpeg n'est chargé qu'ici.
             */
 
             await loadFFmpeg();
@@ -1166,21 +1336,21 @@ convertButton.addEventListener(
             /*
                IMPORTANT :
 
-               for...of = une vidéo à la fois.
-
-               On attend complètement la première
-               avant de commencer la suivante.
+               Une vidéo à la fois.
             */
 
-            for (const video of videos) {
+            for (
+                const video of videos
+            ) {
 
                 if (
-                    video.status !== "waiting"
+                    video.status !==
+                    "waiting"
                 ) {
                     continue;
                 }
 
-                await convertOneVideo(
+                await convertOne(
                     video
                 );
 
@@ -1189,7 +1359,9 @@ convertButton.addEventListener(
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                error
+            );
 
         }
 
@@ -1201,7 +1373,7 @@ convertButton.addEventListener(
 
 
 /* =========================================================
-   CRÉER LE ZIP
+   ZIP
 ========================================================= */
 
 zipButton.addEventListener(
@@ -1210,20 +1382,24 @@ zipButton.addEventListener(
 
         const completed =
             videos.filter(
-                video =>
-                    video.status === "done" &&
-                    video.mp3
+                v =>
+                    v.status === "done" &&
+                    v.mp3
             );
 
 
-        if (!completed.length) {
+        if (
+            !completed.length
+        ) {
             return;
         }
 
 
-        zipButton.disabled = true;
+        zipButton.disabled =
+            true;
 
-        saveButton.disabled = true;
+        saveButton.disabled =
+            true;
 
         zipStatus.textContent =
             "📦 Création du ZIP...";
@@ -1235,11 +1411,9 @@ zipButton.addEventListener(
                 new JSZip();
 
 
-            /*
-               Ajoute chaque MP3.
-            */
-
-            for (const video of completed) {
+            for (
+                const video of completed
+            ) {
 
                 zip.file(
                     video.outputName,
@@ -1249,27 +1423,25 @@ zipButton.addEventListener(
             }
 
 
-            /*
-               Génération du ZIP.
-            */
-
             zipBlob =
                 await zip.generateAsync(
 
                     {
                         type: "blob",
 
-                        compression: "DEFLATE",
+                        compression:
+                            "DEFLATE",
 
                         compressionOptions: {
                             level: 6
                         }
+
                     },
 
                     metadata => {
 
                         zipStatus.textContent =
-                            "📦 ZIP : " +
+                            "📦 Création : " +
                             Math.round(
                                 metadata.percent
                             ) +
@@ -1283,17 +1455,21 @@ zipButton.addEventListener(
             zipStatus.textContent =
                 "✓ ZIP prêt";
 
-            saveButton.disabled = false;
+            saveButton.disabled =
+                false;
 
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                error
+            );
 
-            zipBlob = null;
+            zipBlob =
+                null;
 
             zipStatus.textContent =
-                "⚠️ Impossible de créer le ZIP";
+                "⚠️ Erreur lors de la création du ZIP";
 
         }
 
@@ -1305,7 +1481,7 @@ zipButton.addEventListener(
 
 
 /* =========================================================
-   ENREGISTRER DANS FICHIERS
+   ENREGISTRER
 ========================================================= */
 
 saveButton.addEventListener(
@@ -1317,31 +1493,23 @@ saveButton.addEventListener(
         }
 
 
-        const filename =
-            "videos_MP3.zip";
+        const file =
+            new File(
+                [zipBlob],
+                "videos_MP3.zip",
+                {
+                    type:
+                        "application/zip"
+                }
+            );
 
-
-        /*
-           Sur les navigateurs iPhone/iPad,
-           navigator.share peut ouvrir le menu
-           de partage contenant "Enregistrer dans Fichiers".
-        */
 
         try {
 
-            const file =
-                new File(
-                    [zipBlob],
-                    filename,
-                    {
-                        type:
-                            "application/zip"
-                    }
-                );
-
-
             /*
-               Méthode moderne iOS/iPadOS.
+               Sur iPhone :
+
+               Partager → Enregistrer dans Fichiers
             */
 
             if (
@@ -1357,10 +1525,7 @@ saveButton.addEventListener(
                     files: [file],
 
                     title:
-                        "MP3 convertis",
-
-                    text:
-                        "ZIP contenant les MP3"
+                        "MP3 convertis"
 
                 });
 
@@ -1378,38 +1543,39 @@ saveButton.addEventListener(
                     zipBlob
                 );
 
-
             const a =
-                document.createElement("a");
+                document.createElement(
+                    "a"
+                );
 
-            a.href = url;
+            a.href =
+                url;
 
-            a.download = filename;
+            a.download =
+                "videos_MP3.zip";
 
-            document.body.appendChild(a);
+            document.body.appendChild(
+                a
+            );
 
             a.click();
 
             a.remove();
 
 
-            setTimeout(() => {
-
-                URL.revokeObjectURL(url);
-
-            }, 5000);
+            setTimeout(
+                () =>
+                    URL.revokeObjectURL(
+                        url
+                    ),
+                5000
+            );
 
 
         } catch (error) {
 
-            /*
-               L'utilisateur peut fermer
-               le menu de partage sans que
-               ce soit une vraie erreur.
-            */
-
             console.log(
-                "Partage annulé ou indisponible",
+                "Partage annulé.",
                 error
             );
 
@@ -1423,46 +1589,62 @@ saveButton.addEventListener(
    UTILITAIRES
 ========================================================= */
 
+function getMP3Name(name) {
+
+    const dot =
+        name.lastIndexOf(".");
+
+    if (dot === -1) {
+        return name + ".mp3";
+    }
+
+    return (
+        name.substring(
+            0,
+            dot
+        ) +
+        ".mp3"
+    );
+
+}
+
+
 function formatBytes(bytes) {
 
     if (bytes === 0) {
         return "0 octet";
     }
 
-    const units = [
-        "octets",
-        "Ko",
-        "Mo",
-        "Go"
-    ];
+    const units =
+        [
+            "octets",
+            "Ko",
+            "Mo",
+            "Go"
+        ];
 
-    const index =
+    const i =
         Math.floor(
             Math.log(bytes) /
             Math.log(1024)
         );
 
-    const value =
-        bytes /
-        Math.pow(
-            1024,
-            index
-        );
-
     return (
-        value.toFixed(
-            index === 0 ? 0 : 1
+        (
+            bytes /
+            Math.pow(
+                1024,
+                i
+            )
+        ).toFixed(
+            i === 0 ? 0 : 1
         ) +
         " " +
-        units[index]
+        units[i]
     );
 
 }
 
-
-/* =========================================================
-   PROTECTION HTML
-========================================================= */
 
 function escapeHTML(text) {
 
@@ -1492,10 +1674,11 @@ function escapeHTML(text) {
 
 
 /* =========================================================
-   INITIALISATION
+   DÉMARRAGE
 ========================================================= */
 
-renderList();
+render();
+
 updateButtons();
 
 </script>
