@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Vidéo → MP3</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- FFmpeg -->
+  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/umd/index.js"></script>
+
+  <!-- ZIP -->
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header>
+      <div class="eyebrow">CONVERTISSEUR</div>
+
+      <h1>Vidéo → MP3</h1>
+
+      <p>
+        Transforme plusieurs vidéos en MP3
+        et crée automatiquement un fichier ZIP.
+      </p>
+    </header>
+
+
+    <!-- CHOIX DES VIDÉOS -->
+
+    <section class="card">
+
+      <label for="videoInput" class="selectButton">
+
+        <div class="plus">＋</div>
+
+        <div>
+          <strong>Choisir des vidéos</strong>
+
+          <small>
+            Sélection multiple depuis Fichiers
+          </small>
+        </div>
+
+      </label>
+
+      <input
+        id="videoInput"
+        type="file"
+        accept="video/*,.mp4,.mov,.m4v,.webm,.mkv,.avi"
+        multiple
+      >
+
+    </section>
+
+
+    <!-- OPTIONS -->
+
+    <section id="options" class="card hidden">
+
+      <div class="optionRow">
+
+        <div>
+          <strong>Qualité MP3</strong>
+
+          <small>
+            Une qualité plus élevée produit des fichiers plus gros.
+          </small>
+        </div>
+
+        <select id="bitrate">
+
+          <option value="128">
+            128 kb/s
+          </option>
+
+          <option value="192" selected>
+            192 kb/s
+          </option>
+
+          <option value="256">
+            256 kb/s
+          </option>
+
+          <option value="320">
+            320 kb/s
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        id="convertButton"
+        class="primaryButton"
+      >
+        Convertir et créer le ZIP
+      </button>
+
+
+      <button
+        id="clearButton"
+        class="secondaryButton"
+      >
+        Tout effacer
+      </button>
+
+    </section>
+
+
+    <!-- LISTE DES VIDÉOS -->
+
+    <section id="fileList"></section>
+
+
+    <!-- PROGRESSION GLOBALE -->
+
+    <section
+      id="progressSection"
+      class="card hidden"
+    >
+
+      <strong id="progressTitle">
+        Conversion...
+      </strong>
+
+      <p id="progressText"></p>
+
+      <div class="globalProgress">
+
+        <div id="globalProgressBar"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RÉSULTAT -->
+
+    <section
+      id="result"
+      class="card result hidden"
+    >
+
+      <div class="success">
+        ✓
+      </div>
+
+      <h2>ZIP terminé</h2>
+
+      <p id="resultText"></p>
+
+      <a
+        id="downloadButton"
+        class="primaryButton download"
+        download="MP3.zip"
+      >
+        Enregistrer le ZIP
+      </a>
+
+    </section>
+
+
+    <p class="note">
+      Les vidéos sont traitées directement dans le navigateur.
+      Elles ne sont pas envoyées à un serveur.
+    </p>
+
+  </main>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
